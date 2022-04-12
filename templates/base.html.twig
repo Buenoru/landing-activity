@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <style>
+            .wrapper {
+                margin: 1em auto;
+                max-width: 800px;
+                width: 95%;
+                font: 18px/1.5 sans-serif;
+            }
+
+            .wrapper a {
+                display: block;
+                margin: .2em;
+                padding: .1em .2em;
+                background: #F5F5F5;
+            }
+        </style>
+
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <a href="http://localhost:8080/admin/activity">История активности</a>
+        <a href="#" id="generateUrls">Сгенерировать адреса</a>
+        <div id="urls"></div>
+    </div>
+
+    <script type="text/javascript">
+        const generateUrls = document.querySelector('#generateUrls');
+        const urlsNode = document.querySelector('#urls');
+
+        if (localStorage.getItem('urls')) {
+            const urls = JSON.parse(localStorage['urls']);
+            if (urls) {
+                updateUrls(urls);
+            }
+        }
+
+        generateUrls.onclick = (e) => {
+            e.preventDefault();
+            const cnt = 20;
+            const rnds = [];
+            for (let i = 0; i < cnt; ++i) {
+                let rnd = Math.random().toString(20).substring(2);
+                rnds.push(rnd);
+
+            }
+            localStorage.removeItem('urls');
+            localStorage.setItem('urls', JSON.stringify(rnds));
+            updateUrls(rnds);
+        }
+
+        function updateUrls(urls) {
+            urlsNode.innerHTML = '';
+            urls.forEach(url => {
+                let href = document.createElement('a');
+                href.href = `/rnd/${url}`;
+                href.innerHTML = url
+                urlsNode.append(href);
+            });
+        }
+    </script>
+{% endblock %}

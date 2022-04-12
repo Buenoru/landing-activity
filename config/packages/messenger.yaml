@@ -1,0 +1,20 @@
+framework:
+    messenger:
+        serializer:
+            default_serializer: app.messenger.transport.jsonrpc_serializer
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+#        reset_on_message: true
+
+        transports:
+            async:
+                # https://symfony.com/doc/current/messenger.html#transport-configuration
+                dsn: '%env(resolve:MESSENGER_TRANSPORT_DSN)%'
+                # failed: 'doctrine://default?queue_name=failed'
+                # sync: 'sync://'
+                retry_strategy:
+                    max_retries: 1
+
+        routing:
+            App\Message\Activity: async            # Route your messages to the transports
+            # 'App\Message\YourMessage': async

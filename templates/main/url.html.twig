@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Url: {{ url }}
+{% endblock %}
+
+{% block body %}
+    <a href="{{ url('app_main') }}">На главную</a>
+    <p>Url: {{ url }}</p>
+{% endblock %}
+

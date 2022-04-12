@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <a href="{{ url('app_main') }}">На главную</a>
+        <h4>История активности</h4>
+
+        <table border="1">
+            <thead>
+            <tr>
+                <td>URL</td>
+                <td>Количество визитов</td>
+                <td>Последнее посещение</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for activity in activities %}
+                <tr>
+                    <td>{{ activity['url'] }}</td>
+                    <td>{{ activity['count'] }}</td>
+                    <td>{{ activity['lastVisited'] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
