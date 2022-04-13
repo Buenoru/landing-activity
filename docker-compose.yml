@@ -6,24 +6,24 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./config/server/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./:/var/www/html
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./landing:/var/www/html
     depends_on:
       - landing
 
   landing:
     build:
-      dockerfile: ./config/server/landing.dockerfile
+      dockerfile: ./config/landing.dockerfile
     volumes:
-      - ./:/var/www/html
+      - ./landing:/var/www/html
 
   activity:
     build:
-      dockerfile: ./config/server/activity.dockerfile
+      dockerfile: ./config/activity.dockerfile
     entrypoint: [ 'php', '/var/www/html/bin/console', 'messenger:consume', 'async','-vv' ]
     restart: always
     volumes:
-      - ./:/var/www/html
+      - ./activity:/var/www/html
     depends_on:
       - redis
 
